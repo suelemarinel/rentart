@@ -18,11 +18,11 @@ export const artwork = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: { hotspot: true },
-      validation: (Rule) => Rule.required(),
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'category',

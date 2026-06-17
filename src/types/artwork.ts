@@ -7,7 +7,7 @@ export type Artwork = {
   price: number
   year: number
   available: boolean
-  image?: {
+  images?: {
     asset: {
       _id: string
       url: string
@@ -16,5 +16,5 @@ export type Artwork = {
       x: number
       y: number
     }
-  }
+  }[]
 }

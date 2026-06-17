@@ -8,7 +8,7 @@ export const artworksQuery = groq`*[_type == "artwork" && available == true] | o
   dimensions,
   price,
   year,
-  image {
+  images[] {
     asset-> {
       _id,
       url

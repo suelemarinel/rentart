@@ -1,0 +1,147 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Titre"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "artist",
+        "type": "string",
+        "title": "Artiste"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Peinture",
+              "value": "peinture"
+            },
+            {
+              "title": "Sculpture",
+              "value": "sculpture"
+            },
+            {
+              "title": "Photographie",
+              "value": "photographie"
+            },
+            {
+              "title": "Dessin",
+              "value": "dessin"
+            },
+            {
+              "title": "Tirage",
+              "value": "tirage"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "peinture",
+                  "sculpture",
+                  "photographie",
+                  "dessin",
+                  "tirage"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "category",
+        "type": "string",
+        "title": "Catégorie"
+      },
+      {
+        "name": "year",
+        "type": "number",
+        "title": "Année"
+      },
+      {
+        "description": "Ex: 140 × 180 cm",
+        "name": "dimensions",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "price",
+        "type": "number",
+        "title": "Prix / mois (€)"
+      },
+      {
+        "initialValue": true,
+        "name": "available",
+        "type": "boolean",
+        "title": "Disponible"
+      },
+      {
+        "description": "Ex: #c8b99a",
+        "name": "dominantColor",
+        "type": "string",
+        "title": "Couleur dominante (hex)"
+      }
+    ],
+    "name": "artwork",
+    "type": "document",
+    "title": "Œuvre"
+  }
+]

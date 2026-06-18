@@ -40,13 +40,13 @@ export default function ArtworkCard({ artwork }: Props) {
               {images.length > 1 && (
                 <>
                   <button
-                    onClick={e => { e.stopPropagation(); setCurrent(c => (c - 1 + images.length) % images.length) }}
+                    onClick={e => { e.preventDefault(); e.stopPropagation(); setCurrent(c => (c - 1 + images.length) % images.length) }}
                     className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm z-10"
                   >
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7 2L3 6l4 4" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </button>
                   <button
-                    onClick={e => { e.stopPropagation(); setCurrent(c => (c + 1) % images.length) }}
+                    onClick={e => { e.preventDefault(); e.stopPropagation(); setCurrent(c => (c + 1) % images.length) }}
                     className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm z-10"
                   >
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M5 2l4 4-4 4" stroke="#111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -56,7 +56,7 @@ export default function ArtworkCard({ artwork }: Props) {
                     {images.map((_, i) => (
                       <button
                         key={i}
-                        onClick={e => { e.stopPropagation(); setCurrent(i) }}
+                        onClick={e => { e.preventDefault(); e.stopPropagation(); setCurrent(i) }}
                         className={`rounded-full transition-all duration-300 ${i === current ? 'w-4 h-1 bg-white' : 'w-1 h-1 bg-white/50'}`}
                       />
                     ))}

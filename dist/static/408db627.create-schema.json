@@ -35,12 +35,16 @@
       },
       {
         "options": {
-          "hotspot": true
+          "source": "title",
+          "maxLength": 96
         },
         "validation": [
           {
             "level": "error",
             "rules": [
+              {
+                "flag": "custom"
+              },
               {
                 "flag": "presence",
                 "constraint": "required"
@@ -48,8 +52,35 @@
             ]
           }
         ],
-        "name": "image",
-        "type": "image"
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "images",
+        "type": "array"
       },
       {
         "options": {
@@ -132,12 +163,6 @@
         "name": "available",
         "type": "boolean",
         "title": "Disponible"
-      },
-      {
-        "description": "Ex: #c8b99a",
-        "name": "dominantColor",
-        "type": "string",
-        "title": "Couleur dominante (hex)"
       }
     ],
     "name": "artwork",

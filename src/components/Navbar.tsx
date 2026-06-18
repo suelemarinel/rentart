@@ -8,22 +8,19 @@ export default function Navbar() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
 
-  const isFullscreenHero = pathname === '/'
-  const isSplitHero = pathname === '/a-propos'
+  const isHeroPage = pathname === '/' || pathname === '/a-propos'
 
   useEffect(() => {
-    if (!isFullscreenHero) return
+    setScrolled(window.scrollY > 60)
     const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
-  }, [isFullscreenHero])
+  }, [pathname])
 
-  const transparent = isFullscreenHero && !scrolled
-  const whiteText = transparent // seulement homepage avant scroll
+  const transparent = isHeroPage && !scrolled
+  const whiteText = pathname === '/' && !scrolled
 
   const navBg = transparent
-    ? 'bg-transparent border-transparent'
-    : isSplitHero && !scrolled
     ? 'bg-transparent border-transparent'
     : 'bg-white/90 backdrop-blur-md border-b border-gray-200'
 

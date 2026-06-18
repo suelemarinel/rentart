@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
-const SLIDES = ['/hero-1.png', '/hero-2.png', '/hero-3.png', '/hero-4.png', '/hero-5.png']
+const SLIDES = ['/hero-2.png', '/hero-3.png', '/hero-4.png', '/hero-5.png']
 
 const FAQ = [
   {

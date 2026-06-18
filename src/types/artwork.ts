@@ -2,6 +2,9 @@ export type Artwork = {
   _id: string
   title: string
   artist: string
+  slug: {
+    current: string
+  }
   category: 'peinture' | 'sculpture' | 'photographie' | 'dessin' | 'tirage'
   dimensions: string
   price: number

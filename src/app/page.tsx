@@ -6,6 +6,13 @@ import HeroCatalogue from '@/components/HeroCatalogue'
 
 export const revalidate = 60
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Catalogue d'œuvres d'art à louer",
+  description: "Parcourez notre catalogue d'œuvres originales disponibles à la location mensuelle pour professionnels. Peintures, sculptures, photographies — livraison et installation comprises.",
+}
+
 export default async function HomePage() {
   const artworks: Artwork[] = await client.fetch(artworksQuery)
 

@@ -6,16 +6,18 @@ import { useEffect, useState } from 'react'
 
 export default function Navbar() {
   const pathname = usePathname()
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState<boolean | null>(null)
 
   const isHeroPage = pathname === '/' || pathname === '/a-propos'
 
   useEffect(() => {
-    setScrolled(window.scrollY > 60)
-    const onScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    const check = () => setScrolled(window.scrollY > 60)
+    check()
+    window.addEventListener('scroll', check)
+    return () => window.removeEventListener('scroll', check)
   }, [pathname])
+
+  if (scrolled === null) return null
 
   const transparent = isHeroPage && !scrolled
   const whiteText = pathname === '/' && !scrolled

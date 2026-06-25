@@ -73,7 +73,6 @@ export default function ArtworkCatalogue({ artworks }: Props) {
     letterSpacing: '0.1em',
     whiteSpace: 'nowrap',
     flexShrink: 0,
-    minWidth: '80px',
   }
 
   const row: React.CSSProperties = {
@@ -85,22 +84,27 @@ export default function ArtworkCatalogue({ artworks }: Props) {
   return (
     <>
       <style>{`
+        .filter-bar {
+          background: #F2F1EF;
+          border-bottom: 1px solid rgba(0,0,0,0.05);
+          position: sticky;
+          top: 60px;
+          z-index: 40;
+        }
         .filter-desktop { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
         .filter-mobile { display: none; flex-direction: column; gap: 10px; }
+
         @media (max-width: 767px) {
+          .filter-bar {
+            position: static;
+          }
           .filter-desktop { display: none; }
           .filter-mobile { display: flex; }
         }
       `}</style>
 
       {/* Filter bar */}
-      <div style={{
-        background: '#F2F1EF',
-        position: 'sticky',
-        top: '60px',
-        zIndex: 40,
-        borderBottom: '1px solid rgba(0,0,0,0.05)',
-      }}>
+      <div className="filter-bar">
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '12px clamp(1rem, 4vw, 2rem)' }}>
 
           {/* Desktop — tout sur une ligne */}

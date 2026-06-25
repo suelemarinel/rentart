@@ -24,14 +24,17 @@ export default function ArtworkDetail({ artwork }: Props) {
     <div className="min-h-screen bg-white">
 
       {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-8 pt-28 pb-4">
+      <div className="max-w-7xl mx-auto pt-24 pb-4" style={{ padding: 'clamp(5rem, 8vw, 7rem) clamp(1.5rem, 4vw, 2rem) 1rem' }}>
         <Link href="/" className="text-xs text-gray-400 hover:text-gray-900 transition-colors">
           ← Retour au catalogue
         </Link>
       </div>
 
       {/* Contenu principal */}
-      <div className="max-w-7xl mx-auto px-8 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div
+        className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"
+        style={{ padding: '0 clamp(1.5rem, 4vw, 2rem) clamp(3rem, 8vw, 6rem)' }}
+      >
 
         {/* Colonne gauche — Images */}
         <div className="flex flex-col gap-4">
@@ -65,12 +68,12 @@ export default function ArtworkDetail({ artwork }: Props) {
 
           {/* Thumbnails */}
           {images.length > 1 && (
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               {images.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`relative w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
                     i === current ? 'border-gray-900' : 'border-transparent opacity-50 hover:opacity-80'
                   }`}
                 >
@@ -88,7 +91,7 @@ export default function ArtworkDetail({ artwork }: Props) {
             {CATEGORY_LABELS[artwork.category]}
           </span>
 
-          <h1 className="text-3xl font-light text-gray-900 mb-1">{artwork.title}</h1>
+          <h1 className="font-light text-gray-900 mb-1" style={{ fontSize: 'clamp(1.5rem, 4vw, 1.875rem)' }}>{artwork.title}</h1>
 
           <p className="text-base text-gray-500 mb-6">{artwork.artist}</p>
 
@@ -124,8 +127,8 @@ export default function ArtworkDetail({ artwork }: Props) {
             <p className="text-xs text-gray-400 mt-1">Tout compris — installation, assurance, retrait</p>
           </div>
 
-          
-          <a  href={`mailto:contact@galeriesept.com?subject=Demande de location — ${artwork.title}`}
+          <a
+            href={`mailto:contact@galeriesept.com?subject=Demande de location — ${artwork.title}`}
             className="w-full bg-gray-900 text-white text-sm font-medium py-4 rounded-xl text-center hover:bg-gray-700 transition-colors"
           >
             Demander une location

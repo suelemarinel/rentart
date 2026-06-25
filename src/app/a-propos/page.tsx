@@ -64,7 +64,7 @@ function HeroSlideshow() {
   }, [])
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden" style={{ height: '100%', width: '100%' }}>
       {SLIDES.map((src, i) => (
         <div
           key={src}
@@ -130,15 +130,44 @@ export default function AProposPage() {
 
   return (
     <>
+      <style>{`
+        /* Desktop : split hero */
+        .hero-section {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          height: 100vh;
+          overflow: hidden;
+        }
+        .hero-slideshow { display: block; }
+        .steps-section { padding: 7rem 5rem; }
+        .faq-section { padding: 7rem 5rem; }
+        .cta-section { padding: 7rem 5rem; }
+        .step-grid { display: grid; grid-template-columns: 80px 1fr; gap: 0 3rem; }
+
+        /* Mobile : colonne unique, sans slideshow */
+        @media (max-width: 767px) {
+          .hero-section {
+            grid-template-columns: 1fr;
+            height: auto;
+          }
+          .hero-slideshow { display: none; }
+          .steps-section { padding: 3rem 1.5rem; }
+          .faq-section { padding: 3rem 1.5rem; }
+          .cta-section { padding: 3rem 1.5rem; }
+          .step-grid { grid-template-columns: 48px 1fr; gap: 0 1rem; }
+        }
+      `}</style>
+
       {/* HERO */}
-      <section className="h-screen grid grid-cols-2 overflow-hidden">
-        <div className="flex flex-col justify-center px-20 bg-[#FAFAF8] relative">
+      <section className="hero-section">
+        {/* Texte — identique desktop */}
+        <div className="flex flex-col justify-center px-20 bg-[#FAFAF8] relative" style={{ padding: 'clamp(5rem, 8vw, 5rem) clamp(1.5rem, 6vw, 5rem)' }}>
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/10 to-transparent pointer-events-none z-10" />
           <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-[#8A8880] mb-8 flex items-center gap-3">
             <span className="block w-7 h-px bg-[#C8C7C4]" />
             Galerie Sept · Bruxelles & Knokke
           </p>
-          <h1 className="font-serif text-5xl leading-[1.08] text-[#0E0E0D] mb-7">
+          <h1 className="font-serif text-5xl leading-[1.08] text-[#0E0E0D] mb-7" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}>
             L&apos;art au cœur de votre établissement,{' '}
             <em className="italic text-[#8A8880]">sans contrainte.</em>
           </h1>
@@ -147,7 +176,7 @@ export default function AProposPage() {
             hôtels et espaces professionnels qui souhaitent offrir une expérience
             visuelle forte à leurs clients.
           </p>
-          <div className="mt-16 pt-8 border-t border-[#F2F1EF] flex gap-10">
+          <div className="mt-16 pt-8 border-t border-[#F2F1EF] flex gap-10 flex-wrap">
             {[
               { num: '+200', label: 'Œuvres disponibles' },
               { num: '2', label: 'Galeries — Bruxelles & Knokke' },
@@ -160,13 +189,17 @@ export default function AProposPage() {
             ))}
           </div>
         </div>
-        <HeroSlideshow />
+
+        {/* Slideshow — caché sur mobile */}
+        <div className="hero-slideshow">
+          <HeroSlideshow />
+        </div>
       </section>
 
       {/* STEPS */}
-      <section className="bg-white px-20 py-28">
-        <div className="flex items-baseline justify-between border-b border-gray-100 pb-8 mb-20">
-          <h2 className="font-serif text-3xl text-gray-900">Comment ça fonctionne</h2>
+      <section className="steps-section bg-white">
+        <div className="flex items-baseline justify-between border-b border-gray-100 pb-8 mb-20" style={{ marginBottom: 'clamp(2rem, 6vw, 5rem)' }}>
+          <h2 className="font-serif text-3xl text-gray-900" style={{ fontSize: 'clamp(1.5rem, 3vw, 1.875rem)' }}>Comment ça fonctionne</h2>
           <span className="text-[11px] tracking-[0.1em] uppercase text-gray-400">4 étapes</span>
         </div>
         {STEPS.map((step, i) => (
@@ -174,11 +207,12 @@ export default function AProposPage() {
             key={step.num}
             ref={el => { if (el) stepsRef.current[i] = el }}
             data-delay={i * 100}
-            className="grid grid-cols-[80px_1fr] gap-x-12 py-14 border-b border-gray-100 opacity-0 translate-y-5 transition-all duration-700"
+            className="step-grid opacity-0 translate-y-5 transition-all duration-700"
+            style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) 0', borderBottom: '1px solid #f3f4f6' }}
           >
-            <span className="font-serif text-5xl text-gray-100 leading-none pt-1">{step.num}</span>
+            <span className="font-serif text-5xl text-gray-100 leading-none pt-1" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>{step.num}</span>
             <div>
-              <h3 className="font-serif text-2xl text-gray-900 mb-4">{step.title}</h3>
+              <h3 className="font-serif text-2xl text-gray-900 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.5rem)' }}>{step.title}</h3>
               <p className="text-sm font-light text-gray-400 leading-[1.85] max-w-xl">{step.text}</p>
             </div>
           </div>
@@ -186,9 +220,9 @@ export default function AProposPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[#F2F1EF] px-20 py-28">
-        <div className="flex items-baseline justify-between mb-16">
-          <h2 className="font-serif text-3xl text-gray-900">Questions fréquentes</h2>
+      <section className="faq-section" style={{ background: '#F2F1EF' }}>
+        <div className="flex items-baseline justify-between mb-16" style={{ marginBottom: 'clamp(2rem, 5vw, 4rem)' }}>
+          <h2 className="font-serif text-3xl text-gray-900" style={{ fontSize: 'clamp(1.5rem, 3vw, 1.875rem)' }}>Questions fréquentes</h2>
           <span className="text-[11px] tracking-[0.1em] uppercase text-gray-400">FAQ</span>
         </div>
         <div className="divide-y divide-[#C8C7C4]">
@@ -199,8 +233,8 @@ export default function AProposPage() {
       </section>
 
       {/* FOOTER CTA */}
-      <section className="bg-[#0E0E0D] px-20 py-28 text-center">
-        <h2 className="font-serif text-5xl text-white leading-[1.1] mb-4">
+      <section className="cta-section text-center" style={{ background: '#0E0E0D' }}>
+        <h2 className="font-serif text-5xl text-white leading-[1.1] mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
           Prêt à transformer<br />
           <em className="italic text-white/45">vos espaces ?</em>
         </h2>

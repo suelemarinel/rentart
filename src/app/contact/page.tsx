@@ -8,13 +8,12 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: brancher un vrai service d'envoi (Resend, Formspree, etc.)
     setSent(true)
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] pt-28 pb-24">
-      <div className="max-w-2xl mx-auto px-8">
+    <div className="min-h-screen bg-[#FAFAF8] pb-24" style={{ paddingTop: 'clamp(5rem, 10vw, 7rem)' }}>
+      <div className="max-w-2xl mx-auto" style={{ padding: '0 clamp(1.5rem, 6vw, 2rem)' }}>
 
         {/* Header */}
         <div className="mb-16">
@@ -22,7 +21,7 @@ export default function ContactPage() {
             <span className="block w-7 h-px bg-[#C8C7C4]" />
             Galerie Sept
           </p>
-          <h1 className="font-serif text-4xl text-[#0E0E0D] leading-tight mb-4">
+          <h1 className="font-serif text-4xl text-[#0E0E0D] leading-tight mb-4" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.25rem)' }}>
             Parlons de votre<br />
             <em className="italic text-[#8A8880]">projet.</em>
           </h1>
@@ -38,8 +37,8 @@ export default function ContactPage() {
           <p className="text-sm font-light text-[#8A8880] leading-[1.8] mb-8">
             Rencontrons-nous pour sélectionner ensemble les œuvres adaptées à votre espace.
           </p>
-          
-           <a href="https://calendly.com/PLACEHOLDER"
+          <a
+            href="https://calendly.com/PLACEHOLDER"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-[#0E0E0D] text-white text-sm font-medium px-10 py-4 rounded-full hover:opacity-80 transition-opacity"
@@ -57,9 +56,10 @@ export default function ContactPage() {
 
         {/* Formulaire */}
         {!sent ? (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5">
 
-            <div className="grid grid-cols-2 gap-4">
+            {/* Nom + Email — côte à côte sur desktop, empilés sur mobile */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
               <div className="flex flex-col gap-2">
                 <label className="text-[11px] font-medium tracking-widest uppercase text-[#8A8880]">Nom</label>
                 <input
@@ -108,12 +108,12 @@ export default function ContactPage() {
             </div>
 
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="w-full bg-[#0E0E0D] text-white text-sm font-medium py-4 rounded-xl hover:opacity-80 transition-opacity mt-2"
             >
               Envoyer le message
             </button>
-          </form>
+          </div>
         ) : (
           <div className="text-center py-16">
             <p className="text-4xl mb-6">✦</p>

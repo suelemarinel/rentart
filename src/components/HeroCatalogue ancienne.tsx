@@ -2,9 +2,7 @@
 
 export default function HeroCatalogue() {
   return (
-    <section className="relative h-screen flex flex-col justify-end overflow-hidden"
-      style={{ paddingLeft: 'clamp(1.5rem, 8vw, 5rem)', paddingRight: 'clamp(1.5rem, 8vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 5rem)' }}
-    >
+    <section className="relative h-screen flex flex-col justify-end px-20 pb-20 overflow-hidden">
       {/* Image */}
       <div
         className="absolute inset-0 bg-cover bg-center animate-hero-reveal"
@@ -19,10 +17,7 @@ export default function HeroCatalogue() {
           <span className="block w-7 h-px bg-white/40" />
           Galerie Sept · Bruxelles & Knokke
         </p>
-        <h1
-          className="font-serif leading-[1.06] text-white max-w-3xl mb-9"
-          style={{ fontSize: 'clamp(2.5rem, 8vw, 3.75rem)' }}
-        >
+        <h1 className="font-serif text-6xl leading-[1.06] text-white max-w-3xl mb-9">
           Louez l&apos;art.<br />
           <em className="italic text-white/55">Transformez vos espaces.</em>
         </h1>

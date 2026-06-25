@@ -3,8 +3,34 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className="bg-[#0E0E0D] text-white">
-      <div className="max-w-7xl mx-auto px-8 py-16">
-        <div className="grid grid-cols-4 gap-12 pb-16 border-b border-white/10">
+      <style>{`
+        .footer-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 3rem;
+          padding-bottom: 4rem;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-bottom {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        @media (max-width: 767px) {
+          .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          .footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+          }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(2rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2rem)' }}>
+        <div className="footer-grid">
 
           <div>
             <p className="font-serif text-2xl mb-3">rent<em className="italic text-white/40">art</em></p>
@@ -40,7 +66,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between" style={{ gap: '1.5rem' }}>
             <div>
               <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-white/30 mb-5">Consultation</p>
               <p className="text-sm font-light text-white/40 leading-relaxed mb-6">
@@ -48,14 +74,15 @@ export default function Footer() {
               </p>
             </div>
             <a href="https://calendly.com/galeriesept" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 text-xs font-medium tracking-wide px-6 py-3 rounded-full hover:opacity-85 transition-opacity">
+              className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 text-xs font-medium tracking-wide px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
+              style={{ alignSelf: 'flex-start' }}>
               Prendre rendez-vous
             </a>
           </div>
 
         </div>
 
-        <div className="pt-8 flex items-center justify-between">
+        <div className="footer-bottom" style={{ paddingTop: '2rem' }}>
           <p className="text-xs text-white/25">© 2025 Rentart · Galerie Sept. Tous droits réservés.</p>
           <p className="text-xs text-white/25">Bruxelles &amp; Knokke</p>
         </div>

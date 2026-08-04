@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 
-export const artworksQuery = groq`*[_type == "artwork" && available == true] | order(_createdAt desc) {
+export const artworksQuery = groq`*[_type == "artwork"] | order(orderRank) {
   _id,
   title,
   artist,

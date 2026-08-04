@@ -69,5 +69,10 @@ export const artwork = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'orderRank',
+      type: 'string',
+      hidden: true,
+    }),
   ],
 })

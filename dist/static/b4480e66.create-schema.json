@@ -92,18 +92,6 @@
             {
               "title": "Sculpture",
               "value": "sculpture"
-            },
-            {
-              "title": "Photographie",
-              "value": "photographie"
-            },
-            {
-              "title": "Dessin",
-              "value": "dessin"
-            },
-            {
-              "title": "Tirage",
-              "value": "tirage"
             }
           ]
         },
@@ -115,10 +103,7 @@
                 "flag": "valid",
                 "constraint": [
                   "peinture",
-                  "sculpture",
-                  "photographie",
-                  "dessin",
-                  "tirage"
+                  "sculpture"
                 ]
               },
               {

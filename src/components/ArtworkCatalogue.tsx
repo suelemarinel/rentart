@@ -110,8 +110,7 @@ export default function ArtworkCatalogue({ artworks }: Props) {
     <>
       <style>{`
         .filter-bar {
-          background: #F2F1EF;
-          border-bottom: 1px solid rgba(0,0,0,0.05);
+          background: #E8E4DD;
           position: sticky;
           top: 60px;
           z-index: 40;
@@ -235,27 +234,29 @@ export default function ArtworkCatalogue({ artworks }: Props) {
       </div>
 
       {/* Grid */}
-      <div style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: 'clamp(1rem, 4vw, 2rem)',
-        paddingTop: '1.5rem',
-        paddingBottom: '3rem',
-        minHeight: '100vh',
-      }}>
-        {filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '6rem 0', color: '#9ca3af' }}>
-            <p style={{ fontSize: '2rem', marginBottom: '1rem' }}>✦</p>
-            <p style={{ fontSize: '0.875rem' }}>Aucune œuvre dans cette sélection.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {filtered.map(artwork => (
-              <ArtworkCard key={artwork._id} artwork={artwork} />
-            ))}
-          </div>
-        )}
+<div style={{ background: '#E8E4DD' }}>
+  <div style={{
+    maxWidth: '1280px',
+    margin: '0 auto',
+    padding: 'clamp(1rem, 4vw, 2rem)',
+    paddingTop: '1.5rem',
+    paddingBottom: '3rem',
+    minHeight: '100vh',
+  }}>
+    {filtered.length === 0 ? (
+      <div style={{ textAlign: 'center', padding: '6rem 0', color: '#9ca3af' }}>
+        <p style={{ fontSize: '2rem', marginBottom: '1rem' }}>✦</p>
+        <p style={{ fontSize: '0.875rem' }}>Aucune œuvre dans cette sélection.</p>
       </div>
+    ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {filtered.map(artwork => (
+          <ArtworkCard key={artwork._id} artwork={artwork} />
+        ))}
+      </div>
+    )}
+  </div>
+</div>
     </>
   )
 }

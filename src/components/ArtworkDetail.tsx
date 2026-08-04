@@ -11,9 +11,6 @@ type Props = {
 const CATEGORY_LABELS: Record<string, string> = {
   peinture: 'Peinture',
   sculpture: 'Sculpture',
-  photographie: 'Photographie',
-  dessin: 'Dessin',
-  tirage: 'Tirage',
 }
 
 export default function ArtworkDetail({ artwork }: Props) {

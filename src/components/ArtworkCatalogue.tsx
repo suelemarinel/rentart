@@ -9,7 +9,8 @@ type SizeFilter = 'all' | 'S' | 'M' | 'L' | 'XL'
 type CategoryFilter = 'all' | 'peinture' | 'sculpture'
 type SortFilter = 'default' | 'asc' | 'desc'
 
-function getMaxDimension(dimensions: string): number {
+function getMaxDimension(dimensions: string | null | undefined): number {
+  if (!dimensions) return 0
   const numbers = dimensions.match(/\d+/g)
   if (!numbers) return 0
   return Math.max(...numbers.map(Number))
@@ -110,7 +111,7 @@ export default function ArtworkCatalogue({ artworks }: Props) {
     <>
       <style>{`
         .filter-bar {
-          background: #E8E4DD;
+          background: #F2F1EF;
           position: sticky;
           top: 60px;
           z-index: 40;
@@ -234,7 +235,7 @@ export default function ArtworkCatalogue({ artworks }: Props) {
       </div>
 
       {/* Grid */}
-<div style={{ background: '#E8E4DD' }}>
+<div style={{ background: '#F2F1EF' }}>
   <div style={{
     maxWidth: '1280px',
     margin: '0 auto',

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Artwork } from '@/types/artwork'
 import Link from 'next/link'
+import { urlFor } from '@/sanity/lib/image'
 
 type Props = {
   artwork: Artwork
@@ -29,8 +30,8 @@ export default function ArtworkCard({ artwork }: Props) {
             <>
               {images.map((img, i) => (
                 <img
-                  key={img.asset._id}
-                  src={img.asset.url}
+                  key={`${img.asset._id}-${i}`}
+                  src={urlFor(img).width(800).height(1000).fit('crop').url()}
                   alt={`${artwork.title} — vue ${i + 1}`}
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${i === current ? 'opacity-100' : 'opacity-0'}`}
                 />

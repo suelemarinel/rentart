@@ -24,8 +24,8 @@ export default function Navbar() {
   const whiteText = pathname === '/' && !scrolled
 
   const navBg = transparent
-  ? 'bg-gradient-to-b from-black/35 to-transparent backdrop-blur-[2px] border-transparent'
-  : 'bg-white/90 backdrop-blur-md border-b border-gray-200'
+  ? 'bg-gradient-to-b border-transparent'
+  : 'bg-white/90 border-b border-gray-200'
 
   return (
     <>

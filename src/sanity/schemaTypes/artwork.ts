@@ -42,9 +42,6 @@ export const artwork = defineType({
         list: [
           { title: 'Peinture', value: 'peinture' },
           { title: 'Sculpture', value: 'sculpture' },
-          { title: 'Photographie', value: 'photographie' },
-          { title: 'Dessin', value: 'dessin' },
-          { title: 'Tirage', value: 'tirage' },
         ],
       },
       validation: (Rule) => Rule.required(),

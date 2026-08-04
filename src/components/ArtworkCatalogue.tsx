@@ -6,6 +6,7 @@ import ArtworkCard from './ArtworkCard'
 
 type Props = { artworks: Artwork[] }
 type SizeFilter = 'all' | 'S' | 'M' | 'L' | 'XL'
+type CategoryFilter = 'all' | 'peinture' | 'sculpture'
 type SortFilter = 'default' | 'asc' | 'desc'
 
 function getMaxDimension(dimensions: string): number {
@@ -29,18 +30,26 @@ const SIZE_FILTERS: { value: SizeFilter; label: string; desc?: string }[] = [
   { value: 'XL', label: 'XL', desc: '> 150 cm' },
 ]
 
+const CATEGORY_FILTERS: { value: CategoryFilter; label: string }[] = [
+  { value: 'all', label: 'Toutes' },
+  { value: 'peinture', label: 'Peinture' },
+  { value: 'sculpture', label: 'Sculpture' },
+]
+
 const MIN_PRICE = 0
 const MAX_PRICE = 300
 
 export default function ArtworkCatalogue({ artworks }: Props) {
   const [activeSize, setActiveSize] = useState<SizeFilter>('all')
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all')
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE)
   const [sort, setSort] = useState<SortFilter>('default')
 
   let filtered = artworks.filter(a => {
     const sizeOk = activeSize === 'all' || getSizeLabel(getMaxDimension(a.dimensions)) === activeSize
+    const categoryOk = activeCategory === 'all' || a.category === activeCategory
     const priceOk = a.price <= maxPrice
-    return sizeOk && priceOk
+    return sizeOk && categoryOk && priceOk
   })
 
   if (sort === 'asc') filtered = [...filtered].sort((a, b) => a.price - b.price)
@@ -109,6 +118,13 @@ export default function ArtworkCatalogue({ artworks }: Props) {
 
           {/* Desktop — tout sur une ligne */}
           <div className="filter-desktop">
+            <span style={label}>Catégorie</span>
+            {CATEGORY_FILTERS.map(c => (
+              <button key={c.value} onClick={() => setActiveCategory(c.value)} style={btn(activeCategory === c.value)}>
+                {c.label}
+              </button>
+            ))}
+            <div style={{ width: '1px', height: '16px', background: '#e5e7eb', flexShrink: 0 }} />
             <span style={label}>Taille</span>
             {SIZE_FILTERS.map(s => (
               <button key={s.value} onClick={() => setActiveSize(s.value)} style={btn(activeSize === s.value)}>
@@ -139,6 +155,16 @@ export default function ArtworkCatalogue({ artworks }: Props) {
 
           {/* Mobile — une ligne par filtre */}
           <div className="filter-mobile">
+            <div style={row}>
+              <span style={label}>Catégorie</span>
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                {CATEGORY_FILTERS.map(c => (
+                  <button key={c.value} onClick={() => setActiveCategory(c.value)} style={btn(activeCategory === c.value)}>
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div style={row}>
               <span style={label}>Taille</span>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>

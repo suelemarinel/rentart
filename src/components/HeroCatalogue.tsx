@@ -7,11 +7,14 @@ export default function HeroCatalogue() {
     >
       {/* Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center animate-hero-reveal"
-        style={{ backgroundImage: "url('/hero-apropos.png')" }}
+        className="absolute inset-0 bg-cover animate-hero-reveal"
+        style={{
+          backgroundImage: "url('/hero-principal2.jpg')",
+          backgroundPosition: '50% 75%'
+        }}
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/65" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/15 to-black/80" />
 
       {/* Content */}
       <div className="relative z-10 animate-content-reveal">

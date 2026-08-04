@@ -62,13 +62,13 @@ export default function Navbar() {
           })}
         </ul>
 
-        <button className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 hidden-mobile ${
-          whiteText
-            ? 'bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-sm'
-            : 'bg-gray-900 text-white hover:opacity-80'
-        }`}>
-          Louer une œuvre
-        </button>
+        <Link href="/contact" className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 hidden-mobile ${
+  whiteText
+    ? 'bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-sm'
+    : 'bg-gray-900 text-white hover:opacity-80'
+}`}>
+  Prendre rendez-vous
+</Link>
 
         {/* Burger — visible seulement sur mobile */}
         <button

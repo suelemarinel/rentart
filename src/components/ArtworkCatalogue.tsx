@@ -37,7 +37,7 @@ const CATEGORY_FILTERS: { value: CategoryFilter; label: string }[] = [
 ]
 
 const MIN_PRICE = 0
-const MAX_PRICE = 300
+const MAX_PRICE = 500
 
 export default function ArtworkCatalogue({ artworks }: Props) {
   const [activeSize, setActiveSize] = useState<SizeFilter>('all')
@@ -73,6 +73,22 @@ export default function ArtworkCatalogue({ artworks }: Props) {
     alignItems: 'center',
     gap: '3px',
   })
+
+  const selectStyle: React.CSSProperties = {
+    padding: '6px 28px 6px 14px',
+    borderRadius: '999px',
+    fontSize: '12px',
+    fontWeight: 500,
+    border: '1px solid #e5e7eb',
+    background: 'white',
+    color: '#111827',
+    cursor: 'pointer',
+    appearance: 'none',
+    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path d='M2 4l3 3 3-3' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 10px center',
+    flexShrink: 0,
+  }
 
   const label: React.CSSProperties = {
     fontSize: '11px',
@@ -119,25 +135,34 @@ export default function ArtworkCatalogue({ artworks }: Props) {
           {/* Desktop — tout sur une ligne */}
           <div className="filter-desktop">
             <span style={label}>Catégorie</span>
-            {CATEGORY_FILTERS.map(c => (
-              <button key={c.value} onClick={() => setActiveCategory(c.value)} style={btn(activeCategory === c.value)}>
-                {c.label}
-              </button>
-            ))}
+            <select
+              value={activeCategory}
+              onChange={e => setActiveCategory(e.target.value as CategoryFilter)}
+              style={selectStyle}
+            >
+              {CATEGORY_FILTERS.map(c => (
+                <option key={c.value} value={c.value}>{c.label}</option>
+              ))}
+            </select>
             <div style={{ width: '1px', height: '16px', background: '#e5e7eb', flexShrink: 0 }} />
             <span style={label}>Taille</span>
-            {SIZE_FILTERS.map(s => (
-              <button key={s.value} onClick={() => setActiveSize(s.value)} style={btn(activeSize === s.value)}>
-                {s.label}
-                {s.desc && <span style={{ opacity: 0.5, fontSize: '10px' }}>{s.desc}</span>}
-              </button>
-            ))}
+            <select
+              value={activeSize}
+              onChange={e => setActiveSize(e.target.value as SizeFilter)}
+              style={selectStyle}
+            >
+              {SIZE_FILTERS.map(s => (
+                <option key={s.value} value={s.value}>
+                  {s.label}{s.desc ? ` (${s.desc})` : ''}
+                </option>
+              ))}
+            </select>
             <div style={{ width: '1px', height: '16px', background: '#e5e7eb', flexShrink: 0 }} />
             <span style={label}>Budget max</span>
             <div style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '120px', flexShrink: 0 }}>
               <div style={{ position: 'absolute', width: '100%', height: '3px', background: '#e5e7eb', borderRadius: '99px' }} />
               <div style={{ position: 'absolute', height: '3px', background: '#111827', borderRadius: '99px', width: `${pricePercent}%` }} />
-              <input type="range" min={MIN_PRICE} max={MAX_PRICE} step={10} value={maxPrice}
+              <input type="range" min={MIN_PRICE} max={MAX_PRICE} step={25} value={maxPrice}
                 onChange={e => setMaxPrice(Number(e.target.value))}
                 style={{ position: 'relative', width: '100%', appearance: 'none', background: 'transparent', cursor: 'pointer', height: '16px' }} />
             </div>
@@ -157,23 +182,29 @@ export default function ArtworkCatalogue({ artworks }: Props) {
           <div className="filter-mobile">
             <div style={row}>
               <span style={label}>Catégorie</span>
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              <select
+                value={activeCategory}
+                onChange={e => setActiveCategory(e.target.value as CategoryFilter)}
+                style={selectStyle}
+              >
                 {CATEGORY_FILTERS.map(c => (
-                  <button key={c.value} onClick={() => setActiveCategory(c.value)} style={btn(activeCategory === c.value)}>
-                    {c.label}
-                  </button>
+                  <option key={c.value} value={c.value}>{c.label}</option>
                 ))}
-              </div>
+              </select>
             </div>
             <div style={row}>
               <span style={label}>Taille</span>
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              <select
+                value={activeSize}
+                onChange={e => setActiveSize(e.target.value as SizeFilter)}
+                style={selectStyle}
+              >
                 {SIZE_FILTERS.map(s => (
-                  <button key={s.value} onClick={() => setActiveSize(s.value)} style={btn(activeSize === s.value)}>
-                    {s.label}
-                  </button>
+                  <option key={s.value} value={s.value}>
+                    {s.label}{s.desc ? ` (${s.desc})` : ''}
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
             <div style={row}>
               <span style={label}>Budget max</span>

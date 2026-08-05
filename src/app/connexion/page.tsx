@@ -9,6 +9,7 @@ export default function ConnexionPage() {
   const [mode, setMode] = useState<'login' | 'signup'>('login')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [phone, setPhone] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -27,7 +28,7 @@ export default function ConnexionPage() {
       if (mode === 'login') {
         await login(email, password)
       } else {
-        await signup(email, password)
+        await signup(email, password, phone)
       }
       router.push('/favoris')
     } catch (err) {
@@ -47,14 +48,14 @@ export default function ConnexionPage() {
   }
 
   const handleGoogle = async () => {
-  setError(null)
-  try {
-    await loginWithGoogle()
-    router.push('/favoris')
-  } catch {
-    setError('Connexion Google impossible. Réessayez.')
+    setError(null)
+    try {
+      const { isNewUser } = await loginWithGoogle()
+      router.push(isNewUser ? '/completer-profil' : '/favoris')
+    } catch {
+      setError('Connexion Google impossible. Réessayez.')
+    }
   }
-}
 
   return (
     <div className="min-h-screen bg-[#FAFAF8] flex items-center justify-center" style={{ padding: 'clamp(1.5rem, 6vw, 2rem)' }}>
@@ -96,6 +97,22 @@ export default function ConnexionPage() {
               className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-[#14141A] placeholder:text-[#C8C7C4] focus:outline-none focus:border-[#8A8880] transition-colors"
             />
           </div>
+
+          {mode === 'signup' && (
+  <div className="flex flex-col gap-2">
+    <label className="text-[11px] font-medium tracking-widest uppercase text-[#8A8880]">
+      Téléphone
+    </label>
+    <input
+      type="tel"
+      required
+      value={phone}
+      onChange={e => setPhone(e.target.value)}
+      placeholder="+32 470 12 34 56"
+      className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-[#14141A] placeholder:text-[#C8C7C4] focus:outline-none focus:border-[#8A8880] transition-colors"
+    />
+  </div>
+)}
 
           {error && (
             <p className="text-xs text-red-500 -mt-2">{error}</p>

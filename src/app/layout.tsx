@@ -5,6 +5,7 @@ import type { Metadata } from "next"
 import { Cormorant_Garamond } from "next/font/google"
 import { FavoritesProvider } from "@/context/FavoritesContext"
 import { AuthProvider } from "@/context/AuthContext"
+import ProfileGuard from "@/components/ProfileGuard"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -33,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           <FavoritesProvider>
             <Navbar />
-            {children}
+            <ProfileGuard>{children}</ProfileGuard>
             <Footer />
           </FavoritesProvider>
         </AuthProvider>

@@ -3,6 +3,22 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useFavorites } from '@/context/FavoritesContext'
+import { Heart } from 'lucide-react'
+
+function FavoritesIcon() {
+  const { count } = useFavorites()
+  return (
+    <span className="relative inline-flex items-center">
+      <Heart size={18} strokeWidth={1.6} />
+      {count > 0 && (
+        <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#14141A] text-white text-[9px] font-medium rounded-full flex items-center justify-center">
+          {count}
+        </span>
+      )}
+    </span>
+  )
+}
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -29,15 +45,20 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center justify-between px-8 transition-all duration-300 ${navBg}`}>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 h-[60px] items-center px-8 transition-all duration-300 ${navBg}`}
+        style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr' }}
+      >
+        {/* Colonne gauche — logo */}
         <Link
           href="/"
-          className={`font-serif text-xl tracking-tight transition-colors duration-300 ${whiteText ? 'text-white' : 'text-gray-900'}`}
+          className={`font-serif text-xl tracking-tight transition-colors duration-300 justify-self-start ${whiteText ? 'text-white' : 'text-gray-900'}`}
         >
           rent<span className={`italic ${whiteText ? 'text-white/55' : 'text-gray-400'}`}>art</span>
         </Link>
 
-        <ul style={{ display: 'var(--nav-desktop-display, flex)' }} className="gap-8 list-none">
+        {/* Colonne centrale — liens, vraiment centrés */}
+        <ul style={{ display: 'var(--nav-desktop-display, flex)' }} className="gap-8 list-none justify-self-center">
           {[
             { href: '/', label: 'Catalogue' },
             { href: '/a-propos', label: 'À propos' },
@@ -61,24 +82,35 @@ export default function Navbar() {
           })}
         </ul>
 
-        <Link href="/contact" className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 hidden-mobile ${
-  whiteText
-    ? 'bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-sm'
-    : 'bg-[#14141A] text-white hover:opacity-80'
-}`}>
-          Prendre rendez-vous
-        </Link>
+        {/* Colonne droite — cœur + bouton regroupés */}
+        <div className="flex items-center gap-5 justify-self-end">
+          <Link
+            href="/favoris"
+            aria-label="Mes favoris"
+            className={`hidden-mobile inline-flex items-center transition-colors duration-300 ${whiteText ? 'text-white/70 hover:text-white' : 'text-gray-400 hover:text-gray-900'}`}
+          >
+            <FavoritesIcon />
+          </Link>
 
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-          className="burger-btn"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'none' }}
-        >
-          <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', marginBottom: '5px', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none' }} />
-          <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', marginBottom: '5px', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-          <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
-        </button>
+          <Link href="/contact" className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 hidden-mobile ${
+            whiteText
+              ? 'bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-sm'
+              : 'bg-[#14141A] text-white hover:opacity-80'
+          }`}>
+            Prendre rendez-vous
+          </Link>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+            className="burger-btn"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'none' }}
+          >
+            <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', marginBottom: '5px', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none' }} />
+            <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', marginBottom: '5px', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+            <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
+          </button>
+        </div>
       </nav>
 
       <div style={{

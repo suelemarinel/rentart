@@ -3,6 +3,7 @@ import Footer from "@/components/Footer"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Cormorant_Garamond } from "next/font/google"
+import { FavoritesProvider } from "@/context/FavoritesContext"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -28,9 +29,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={cormorant.variable}>
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <FavoritesProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </FavoritesProvider>
       </body>
     </html>
   )

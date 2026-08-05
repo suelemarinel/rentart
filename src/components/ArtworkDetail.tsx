@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { Artwork } from '@/types/artwork'
 import Link from 'next/link'
+import { Heart } from 'lucide-react'
+import { useFavorites } from '@/context/FavoritesContext'
 
 type Props = {
   artwork: Artwork
@@ -16,6 +18,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 export default function ArtworkDetail({ artwork }: Props) {
   const [current, setCurrent] = useState(0)
   const images = artwork.images ?? []
+  const { isFavorited, toggleFavorite } = useFavorites()
+  const favorited = isFavorited(artwork._id)
 
   return (
     <div className="min-h-screen bg-white">
@@ -91,15 +95,30 @@ export default function ArtworkDetail({ artwork }: Props) {
           className="flex flex-col justify-center"
           style={{ padding: 'clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4.5rem)' }}
         >
-          {/* Eyebrow avec trait d'accent */}
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-px bg-[#111110]" />
-            <span className="text-[11px] font-medium text-gray-400 uppercase tracking-[0.25em]">
-              {CATEGORY_LABELS[artwork.category]}
-            </span>
+          {/* Eyebrow + bouton favori */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-px bg-[#111110]" />
+              <span className="text-[11px] font-medium text-gray-400 uppercase tracking-[0.25em]">
+                {CATEGORY_LABELS[artwork.category]}
+              </span>
+            </div>
+
+            <button
+              onClick={() => toggleFavorite(artwork._id)}
+              aria-label={favorited ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+              className="transition-transform hover:scale-110"
+            >
+              <Heart
+                size={22}
+                color="#14141A"
+                fill={favorited ? '#14141A' : 'none'}
+                strokeWidth={1.6}
+              />
+            </button>
           </div>
 
-          {/* Titre en serif italique — cohérent avec font-serif utilisé partout ailleurs sur le site */}
+          {/* Titre en serif italique */}
           <h1
             className="font-serif italic text-[#111110] mb-3"
             style={{
@@ -115,7 +134,7 @@ export default function ArtworkDetail({ artwork }: Props) {
             {artwork.artist}
           </p>
 
-          {/* Fiche technique — style étiquette de musée, avec pointillés de liaison */}
+          {/* Fiche technique — style étiquette de musée */}
           <dl className="flex flex-col mb-10">
             {artwork.year && (
               <div className="flex items-baseline gap-3 py-2.5 border-b border-gray-100">
@@ -140,7 +159,7 @@ export default function ArtworkDetail({ artwork }: Props) {
             </div>
           </dl>
 
-          {/* Prix — bordure fine plutôt que fond plein, chiffre en serif */}
+          {/* Prix */}
           <div className="border border-gray-200 rounded-sm p-6 mb-8">
             <p className="text-[11px] text-gray-400 uppercase tracking-[0.2em] mb-2">Location mensuelle</p>
             <p className="font-serif text-[#111110]" style={{ fontSize: '2.25rem', fontWeight: 500 }}>
@@ -150,7 +169,7 @@ export default function ArtworkDetail({ artwork }: Props) {
             <p className="text-xs text-gray-400 mt-2">Tout compris — installation, assurance, retrait</p>
           </div>
 
-          {/* CTA — contour fin plutôt que bloc plein */}
+          {/* CTA */}
           <a
             href={`mailto:contact@galeriesept.com?subject=Demande de location — ${artwork.title}`}
             className="w-full border border-[#111110] text-[#111110] text-xs font-medium uppercase tracking-[0.15em] py-4 rounded-sm text-center hover:bg-[#111110] hover:text-white transition-colors duration-300"

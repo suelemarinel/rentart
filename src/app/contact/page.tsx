@@ -21,7 +21,7 @@ export default function ContactPage() {
             <span className="block w-7 h-px bg-[#C8C7C4]" />
             Galerie Sept
           </p>
-          <h1 className="font-serif text-4xl text-[#0E0E0D] leading-tight mb-4" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.25rem)' }}>
+          <h1 className="font-serif text-4xl text-[#14141A] leading-tight mb-4" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.25rem)' }}>
             Parlons de votre<br />
             <em className="italic text-[#8A8880]">projet.</em>
           </h1>
@@ -33,7 +33,7 @@ export default function ContactPage() {
         {/* Calendly */}
         <div className="bg-white border border-[#E8E7E4] rounded-2xl p-8 text-center mb-2">
           <p className="text-[11px] font-medium tracking-widest uppercase text-[#8A8880] mb-3">Consultation</p>
-          <h2 className="font-serif text-2xl text-[#0E0E0D] mb-3">Prendre rendez-vous</h2>
+          <h2 className="font-serif text-2xl text-[#14141A] mb-3">Prendre rendez-vous</h2>
           <p className="text-sm font-light text-[#8A8880] leading-[1.8] mb-8">
             Rencontrons-nous pour sélectionner ensemble les œuvres adaptées à votre espace.
           </p>
@@ -68,7 +68,7 @@ export default function ContactPage() {
                   value={form.nom}
                   onChange={e => setForm(f => ({ ...f, nom: e.target.value }))}
                   placeholder="Jean Dupont"
-                  className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-gray-400 transition-colors"
+                  className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-[#14141A] placeholder:text-[#C8C7C4] focus:outline-none focus:border-[#8A8880] transition-colors"
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -79,7 +79,7 @@ export default function ContactPage() {
                   value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   placeholder="jean@restaurant.be"
-                  className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-gray-400 transition-colors"
+                  className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-[#14141A] placeholder:text-[#C8C7C4] focus:outline-none focus:border-[#8A8880] transition-colors"
                 />
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 value={form.etablissement}
                 onChange={e => setForm(f => ({ ...f, etablissement: e.target.value }))}
                 placeholder="Restaurant Le Zinc, Bruxelles"
-                className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-gray-400 transition-colors"
+                className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-[#14141A] placeholder:text-[#C8C7C4] focus:outline-none focus:border-[#8A8880] transition-colors"
               />
             </div>
 
@@ -103,7 +103,7 @@ export default function ContactPage() {
                 value={form.message}
                 onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                 placeholder="Décrivez votre espace, le type d'œuvres recherché, votre budget mensuel..."
-                className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-gray-400 transition-colors resize-none"
+                className="bg-white border border-[#E8E7E4] rounded-xl px-4 py-3 text-sm text-[#14141A] placeholder:text-[#C8C7C4] focus:outline-none focus:border-[#8A8880] transition-colors resize-none"
               />
             </div>
 
@@ -116,8 +116,8 @@ export default function ContactPage() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-4xl mb-6">✦</p>
-            <h2 className="font-serif text-2xl text-gray-900 mb-3">Message envoyé</h2>
+            <p className="text-4xl text-[#C8C7C4] mb-6">✦</p>
+            <h2 className="font-serif text-2xl text-[#14141A] mb-3">Message envoyé</h2>
             <p className="text-sm font-light text-[#8A8880]">Nous vous recontactons sous 24h.</p>
           </div>
         )}

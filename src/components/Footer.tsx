@@ -74,10 +74,10 @@ export default function Footer() {
               </p>
             </div>
             <a href="https://calendly.com/galeriesept" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 text-xs font-medium tracking-wide px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
-              style={{ alignSelf: 'flex-start' }}>
-              Prendre rendez-vous
-            </a>
+  className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 text-xs font-medium tracking-wide px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
+  style={{ alignSelf: 'flex-start' }}>
+  Prendre rendez-vous
+</a>
           </div>
 
         </div>

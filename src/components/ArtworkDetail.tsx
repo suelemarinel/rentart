@@ -19,43 +19,46 @@ export default function ArtworkDetail({ artwork }: Props) {
 
   return (
     <div className="min-h-screen bg-white">
+      <div className="grid grid-cols-1 lg:grid-cols-[55%_1fr]">
 
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto pt-24 pb-4" style={{ padding: 'clamp(5rem, 8vw, 7rem) clamp(1.5rem, 4vw, 2rem) 1rem' }}>
-        <Link href="/" className="text-xs text-gray-400 hover:text-gray-900 transition-colors">
-          ← Retour au catalogue
-        </Link>
-      </div>
+        {/* Panneau gauche — Vitrine de l'œuvre */}
+        <div className="relative lg:sticky lg:top-0 lg:h-screen bg-[#F5F4F1] flex flex-col">
 
-      {/* Contenu principal */}
-      <div
-        className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"
-        style={{ padding: '0 clamp(1.5rem, 4vw, 2rem) clamp(3rem, 8vw, 6rem)' }}
-      >
+          <div className="absolute top-0 left-0 z-10" style={{ padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
+            <Link
+              href="/"
+              className="text-xs text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              ← Retour au catalogue
+            </Link>
+          </div>
 
-        {/* Colonne gauche — Images */}
-        <div className="flex flex-col gap-4">
-
-          {/* Image principale */}
-          <div className="relative aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden">
+          <div
+            className="relative flex-1 flex items-center justify-center"
+            style={{ padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 4rem)' }}
+          >
             {images[current] && (
               <img
                 src={images[current].asset.url}
                 alt={artwork.title}
-                className="w-full h-full object-cover"
+                className="max-w-full max-h-full w-auto h-auto object-contain"
+                style={{ maxHeight: 'min(70vh, 640px)' }}
               />
             )}
+
             {images.length > 1 && (
               <>
                 <button
                   onClick={() => setCurrent(i => (i - 1 + images.length) % images.length)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center text-gray-700 hover:bg-white shadow transition"
+                  aria-label="Image précédente"
+                  className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-700 hover:bg-white shadow transition"
                 >
                   ‹
                 </button>
                 <button
                   onClick={() => setCurrent(i => (i + 1) % images.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center text-gray-700 hover:bg-white shadow transition"
+                  aria-label="Image suivante"
+                  className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-700 hover:bg-white shadow transition"
                 >
                   ›
                 </button>
@@ -63,14 +66,16 @@ export default function ArtworkDetail({ artwork }: Props) {
             )}
           </div>
 
-          {/* Thumbnails */}
           {images.length > 1 && (
-            <div className="flex gap-2 flex-wrap">
+            <div
+              className="flex gap-2 justify-center flex-wrap"
+              style={{ padding: '0 2rem clamp(1.5rem, 4vw, 2.5rem)' }}
+            >
               {images.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`relative w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${
                     i === current ? 'border-gray-900' : 'border-transparent opacity-50 hover:opacity-80'
                   }`}
                 >
@@ -81,57 +86,79 @@ export default function ArtworkDetail({ artwork }: Props) {
           )}
         </div>
 
-        {/* Colonne droite — Infos */}
-        <div className="flex flex-col justify-start pt-2">
+        {/* Panneau droit — Fiche de l'œuvre, style étiquette de galerie */}
+        <div
+          className="flex flex-col justify-center"
+          style={{ padding: 'clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4.5rem)' }}
+        >
+          {/* Eyebrow avec trait d'accent */}
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-8 h-px bg-[#111110]" />
+            <span className="text-[11px] font-medium text-gray-400 uppercase tracking-[0.25em]">
+              {CATEGORY_LABELS[artwork.category]}
+            </span>
+          </div>
 
-          <span className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-3">
-            {CATEGORY_LABELS[artwork.category]}
-          </span>
+          {/* Titre en serif italique — cohérent avec font-serif utilisé partout ailleurs sur le site */}
+          <h1
+            className="font-serif italic text-[#111110] mb-3"
+            style={{
+              fontWeight: 500,
+              fontSize: 'clamp(2.75rem, 5vw, 4rem)',
+              lineHeight: 1.05,
+            }}
+          >
+            {artwork.title}
+          </h1>
 
-          <h1 className="font-light text-gray-900 mb-1" style={{ fontSize: 'clamp(1.5rem, 4vw, 1.875rem)' }}>{artwork.title}</h1>
+          <p className="font-serif text-base text-gray-500 mb-10 tracking-wide" style={{ fontSize: '1.15rem' }}>
+            {artwork.artist}
+          </p>
 
-          <p className="text-base text-gray-500 mb-6">{artwork.artist}</p>
-
-          <div className="w-12 h-px bg-gray-200 mb-6" />
-
-          <dl className="flex flex-col gap-3 mb-8">
+          {/* Fiche technique — style étiquette de musée, avec pointillés de liaison */}
+          <dl className="flex flex-col mb-10">
             {artwork.year && (
-              <div className="flex justify-between text-sm">
-                <dt className="text-gray-400">Année</dt>
-                <dd className="text-gray-900">{artwork.year}</dd>
+              <div className="flex items-baseline gap-3 py-2.5 border-b border-gray-100">
+                <dt className="text-[11px] uppercase tracking-widest text-gray-400 whitespace-nowrap">Année</dt>
+                <span className="flex-1 border-b border-dotted border-gray-300 -mb-1" />
+                <dd className="text-sm text-[#111110]">{artwork.year}</dd>
               </div>
             )}
             {artwork.dimensions && (
-              <div className="flex justify-between text-sm">
-                <dt className="text-gray-400">Dimensions</dt>
-                <dd className="text-gray-900">{artwork.dimensions}</dd>
+              <div className="flex items-baseline gap-3 py-2.5 border-b border-gray-100">
+                <dt className="text-[11px] uppercase tracking-widest text-gray-400 whitespace-nowrap">Dimensions</dt>
+                <span className="flex-1 border-b border-dotted border-gray-300 -mb-1" />
+                <dd className="text-sm text-[#111110]">{artwork.dimensions} cm</dd>
               </div>
             )}
-            <div className="flex justify-between text-sm">
-              <dt className="text-gray-400">Disponibilité</dt>
-              <dd className={artwork.available ? 'text-green-600' : 'text-red-400'}>
+            <div className="flex items-baseline gap-3 py-2.5 border-b border-gray-100">
+              <dt className="text-[11px] uppercase tracking-widest text-gray-400 whitespace-nowrap">Disponibilité</dt>
+              <span className="flex-1 border-b border-dotted border-gray-300 -mb-1" />
+              <dd className={`text-sm ${artwork.available ? 'text-green-700' : 'text-red-400'}`}>
                 {artwork.available ? 'Disponible' : 'Non disponible'}
               </dd>
             </div>
           </dl>
 
-          <div className="bg-[#F5F4F1] rounded-xl p-5 mb-8">
-            <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">Location mensuelle</p>
-            <p className="text-2xl font-light text-gray-900">
-              à partir de <span className="font-medium">{artwork.price}€</span>
-              <span className="text-sm font-normal text-gray-400"> / mois</span>
+          {/* Prix — bordure fine plutôt que fond plein, chiffre en serif */}
+          <div className="border border-gray-200 rounded-sm p-6 mb-8">
+            <p className="text-[11px] text-gray-400 uppercase tracking-[0.2em] mb-2">Location mensuelle</p>
+            <p className="font-serif text-[#111110]" style={{ fontSize: '2.25rem', fontWeight: 500 }}>
+              {artwork.price}€
+              <span className="text-sm text-gray-400 ml-1 font-sans">/ mois</span>
             </p>
-            <p className="text-xs text-gray-400 mt-1">Tout compris — installation, assurance, retrait</p>
+            <p className="text-xs text-gray-400 mt-2">Tout compris — installation, assurance, retrait</p>
           </div>
 
+          {/* CTA — contour fin plutôt que bloc plein */}
           <a
             href={`mailto:contact@galeriesept.com?subject=Demande de location — ${artwork.title}`}
-            className="w-full bg-gray-900 text-white text-sm font-medium py-4 rounded-xl text-center hover:bg-gray-700 transition-colors"
+            className="w-full border border-[#111110] text-[#111110] text-xs font-medium uppercase tracking-[0.15em] py-4 rounded-sm text-center hover:bg-[#111110] hover:text-white transition-colors duration-300"
           >
             Demander une location
           </a>
 
-          <p className="text-xs text-gray-400 text-center mt-3">
+          <p className="font-serif text-xs text-gray-400 text-center mt-4 italic">
             Réponse sous 24h · Sans engagement
           </p>
         </div>

@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center justify-between px-8 transition-all duration-300 ${navBg}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 h-15 flex items-center justify-between px-8 transition-all duration-300 ${navBg}`}>
         <Link
           href="/"
           className={`font-serif text-xl tracking-tight transition-colors duration-300 ${whiteText ? 'text-white' : 'text-gray-900'}`}
@@ -94,17 +94,17 @@ export default function Navbar() {
         display: 'none',
       }} className="mobile-menu">
         {[
-          { href: '/', label: 'Catalogue' },
-          { href: '/a-propos', label: 'À propos' },
-          { href: '/contact', label: 'Contact' },
-        ].map(({ href, label }) => (
-          <Link key={href} href={href} onClick={() => setMenuOpen(false)} style={{
-            fontFamily: 'Georgia, serif', fontSize: '2.5rem',
-            textDecoration: 'none', color: pathname === href ? '#d1d5db' : '#111827',
-          }}>
-            {label}
-          </Link>
-        ))}
+  { href: '/', label: 'Catalogue' },
+  { href: '/a-propos', label: 'À propos' },
+  { href: '/contact', label: 'Contact' },
+].map(({ href, label }) => (
+  <Link key={href} href={href} onClick={() => setMenuOpen(false)} className="font-serif" style={{
+    fontSize: '2.5rem',
+    textDecoration: 'none', color: pathname === href ? '#d1d5db' : '#111827',
+  }}>
+    {label}
+  </Link>
+))}
       </div>
 
       <style>{`

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: var(--font-cormorant), Georgia, serif;
+}
+
 body {
   background: #F2F1EF;
   color: #111110;

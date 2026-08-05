@@ -100,7 +100,7 @@ export default function AProposPage() {
         .hero-frame {
           position: relative;
           height: 100vh;
-          padding: clamp(0.75rem, 1.6vw, 1.5rem);
+          padding: clamp(0.75rem, 0.75vw, 0.75rem);
           background: #FAFAF8;
         }
         .hero-canvas {

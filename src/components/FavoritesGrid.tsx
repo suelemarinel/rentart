@@ -38,8 +38,8 @@ export default function FavoritesGrid({ artworks }: Props) {
           </div>
         ) : (
           <>
-            <div className="bg-white border border-[#E8E7E4] rounded-2xl p-6 mb-10 flex flex-wrap items-center justify-between gap-4">
-              <p className="text-sm text-[#8A8880] leading-relaxed max-w-md">
+            <div className="bg-white border border-[#E8E7E4] rounded-2xl p-6 mb-10 flex flex-wrap items-center justify-between gap-6">
+              <p className="text-sm text-[#8A8880] leading-relaxed">
                 Connectez-vous pour sauvegarder votre sélection et la retrouver sur tous vos appareils.
               </p>
               <button

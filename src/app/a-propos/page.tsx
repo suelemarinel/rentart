@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
-const SLIDES = ['/hero-2.png', '/hero-3.png', '/hero-4.png', '/hero-5.png']
-
 const FAQ = [
   {
     q: "Quelle est la durée minimale d'un contrat ?",
@@ -55,39 +53,6 @@ const STEPS = [
   },
 ]
 
-function HeroSlideshow() {
-  const [current, setCurrent] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrent(c => (c + 1) % SLIDES.length), 4000)
-    return () => clearInterval(timer)
-  }, [])
-
-  return (
-    <div className="relative overflow-hidden" style={{ height: '100%', width: '100%' }}>
-      {SLIDES.map((src, i) => (
-        <div
-          key={src}
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-          style={{ backgroundImage: `url('${src}')`, opacity: i === current ? 1 : 0 }}
-        />
-      ))}
-      <div className="absolute top-8 right-8 text-[11px] text-white/50 tracking-[0.08em] z-10">
-        {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
-      </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`h-0.5 rounded-full transition-all duration-300 ${i === current ? 'w-10 bg-white' : 'w-6 bg-white/30'}`}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
 
@@ -131,70 +96,143 @@ export default function AProposPage() {
   return (
     <>
       <style>{`
-        /* Desktop : split hero */
-        .hero-section {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+        /* HERO — plein écran, encadré façon œuvre accrochée */
+        .hero-frame {
+          position: relative;
           height: 100vh;
-          overflow: hidden;
+          padding: clamp(0.75rem, 1.6vw, 1.5rem);
+          background: #FAFAF8;
         }
-        .hero-slideshow { display: block; }
+        .hero-canvas {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          border-radius: 2px;
+        }
+        .hero-media-inner {
+          position: absolute;
+          inset: -3%;
+          width: 106%;
+          height: 106%;
+          background-size: cover;
+          background-position: center;
+          animation: kenBurns 30s ease-in-out infinite alternate;
+        }
+        @keyframes kenBurns {
+          from { transform: scale(1) translate(0, 0); }
+          to   { transform: scale(1.07) translate(-1.2%, -0.8%); }
+        }
+        .hero-grain {
+          position: absolute;
+          inset: 0;
+          z-index: 5;
+          pointer-events: none;
+          opacity: 0.045;
+          mix-blend-mode: overlay;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        .hero-caption {
+          position: absolute;
+          bottom: clamp(1.5rem, 5vw, 4rem);
+          left: clamp(1.5rem, 5vw, 4rem);
+          right: clamp(1.5rem, 5vw, 4rem);
+          z-index: 10;
+        }
         .steps-section { padding: 7rem 5rem; }
         .faq-section { padding: 7rem 5rem; }
         .cta-section { padding: 7rem 5rem; }
         .step-grid { display: grid; grid-template-columns: 80px 1fr; gap: 0 3rem; }
 
-        /* Mobile : colonne unique, sans slideshow */
         @media (max-width: 767px) {
-          .hero-section {
-            grid-template-columns: 1fr;
-            height: auto;
-          }
-          .hero-slideshow { display: none; }
+          .hero-frame { padding: 0.5rem; height: 92vh; }
           .steps-section { padding: 3rem 1.5rem; }
           .faq-section { padding: 3rem 1.5rem; }
           .cta-section { padding: 3rem 1.5rem; }
           .step-grid { grid-template-columns: 48px 1fr; gap: 0 1rem; }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-media-inner { animation: none; }
+        }
       `}</style>
 
-      {/* HERO */}
-      <section className="hero-section">
-        {/* Texte — identique desktop */}
-        <div className="flex flex-col justify-center px-20 bg-[#FAFAF8] relative" style={{ padding: 'clamp(5rem, 8vw, 5rem) clamp(1.5rem, 6vw, 5rem)' }}>
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/10 to-transparent pointer-events-none z-10" />
-          <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-[#8A8880] mb-8 flex items-center gap-3">
-            <span className="block w-7 h-px bg-[#C8C7C4]" />
+      {/* HERO — plein écran, encadré, signature N&B duotone */}
+      <div className="hero-frame">
+        <div className="hero-canvas">
+          <div
+            className="hero-media-inner"
+            style={{ backgroundImage: "url('/step-7.jpeg')", backgroundPosition: '50% 22%' }}
+          />
+
+          {/* Force le N&B même si le fichier source dérive, + contraste légèrement creusé */}
+          <div
+            className="absolute inset-0 z-[4] pointer-events-none"
+            style={{ backdropFilter: 'grayscale(1) contrast(1.08)', WebkitBackdropFilter: 'grayscale(1) contrast(1.08)' }}
+          />
+
+          {/* Teinte duotone chaude — relie le N&B à la palette du site plutôt qu'un noir froid */}
+          <div
+            className="absolute inset-0 z-[5] pointer-events-none"
+            style={{ background: '#8A7A68', mixBlendMode: 'multiply', opacity: 0.16 }}
+          />
+
+          <div className="hero-grain" />
+
+          {/* Voile uniforme — contraste minimum garanti */}
+          <div className="absolute inset-0 z-[6] pointer-events-none bg-black/20" />
+
+          {/* Scrim bas — zone du texte */}
+          <div
+            className="absolute inset-0 z-[6] pointer-events-none"
+            style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.42) 42%, rgba(0,0,0,0) 68%)' }}
+          />
+          <div
+            className="absolute inset-0 z-[6] pointer-events-none"
+            style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 30%)' }}
+          />
+
+          {/* Eyebrow */}
+          <p
+            className="absolute z-10 text-[11px] font-medium tracking-[0.14em] uppercase text-white/80 flex items-center gap-3"
+            style={{ top: 'clamp(4.5rem, 8vw, 6rem)', left: 'clamp(1.5rem, 5vw, 4rem)' }}
+          >
+            <span className="block w-7 h-px bg-white/50" />
             Galerie Sept · Bruxelles & Knokke
           </p>
-          <h1 className="font-serif text-5xl leading-[1.08] text-[#0E0E0D] mb-7" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}>
-            L&apos;art au cœur de votre établissement,{' '}
-            <em className="italic text-[#8A8880]">sans contrainte.</em>
-          </h1>
-          <p className="text-sm font-light text-[#8A8880] leading-[1.8] max-w-sm">
-            Un service de location d&apos;œuvres d&apos;art originales pensé pour les restaurants,
-            hôtels et espaces professionnels qui souhaitent offrir une expérience
-            visuelle forte à leurs clients.
-          </p>
-          <div className="mt-16 pt-8 border-t border-[#F2F1EF] flex gap-10 flex-wrap">
-            {[
-              { num: '+200', label: 'Œuvres disponibles' },
-              { num: '2', label: 'Galeries — Bruxelles & Knokke' },
-              { num: '100%', label: 'Tout compris' },
-            ].map(s => (
-              <div key={s.num}>
-                <div className="font-serif text-3xl text-[#0E0E0D] leading-none mb-1">{s.num}</div>
-                <div className="text-[11px] text-[#8A8880] tracking-wide">{s.label}</div>
+
+          {/* Texte principal — flotte directement sur l'image */}
+          <div className="hero-caption">
+            <h1
+              className="font-serif text-white mb-5"
+              style={{
+                fontSize: 'clamp(2.75rem, 7vw, 5.5rem)',
+                lineHeight: 1.0,
+                maxWidth: '16ch',
+                textShadow: '0 2px 24px rgba(0,0,0,0.5)',
+              }}
+            >
+              Des œuvres uniques{' '}
+              <em className="italic text-white/70">pour embellir vos espaces.</em>
+            </h1>
+
+            <div className="flex flex-wrap items-end justify-between gap-6 mt-10 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.25)' }}>
+              <p className="text-sm font-light text-white/85 leading-[1.8] max-w-sm" style={{ textShadow: '0 1px 12px rgba(0,0,0,0.4)' }}>
+                Chaque pièce de notre catalogue est une œuvre originale, sélectionnée et façonnée
+                par des artistes que nous représentons.
+              </p>
+
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2 text-[11px] tracking-wide text-white/70">
+                <span><span className="font-serif italic text-sm text-white mr-1">+200</span>œuvres</span>
+                <span className="text-white/40 mx-1">·</span>
+                <span><span className="font-serif italic text-sm text-white mr-1">2</span>galeries</span>
+                <span className="text-white/40 mx-1">·</span>
+                <span><span className="font-serif italic text-sm text-white mr-1">100%</span>tout compris</span>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-
-        {/* Slideshow — caché sur mobile */}
-        <div className="hero-slideshow">
-          <HeroSlideshow />
-        </div>
-      </section>
+      </div>
 
       {/* STEPS */}
       <section className="steps-section bg-white">
@@ -233,7 +271,7 @@ export default function AProposPage() {
       </section>
 
       {/* FOOTER CTA */}
-      <section className="cta-section text-center" style={{ background: '#0E0E0D' }}>
+      <section className="cta-section text-center" style={{ background: '#14141A' }}>
         <h2 className="font-serif text-5xl text-white leading-[1.1] mb-4" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
           Prêt à transformer<br />
           <em className="italic text-white/45">vos espaces ?</em>

@@ -41,7 +41,7 @@ export default function ContactPage() {
             href="https://calendly.com/PLACEHOLDER"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-[#0E0E0D] text-white text-sm font-medium px-10 py-4 rounded-full hover:opacity-80 transition-opacity"
+            className="inline-block bg-[#14141A] text-white text-sm font-medium px-10 py-4 rounded-full hover:opacity-80 transition-opacity"
           >
             Choisir un créneau
           </a>
@@ -109,7 +109,7 @@ export default function ContactPage() {
 
             <button
               onClick={handleSubmit}
-              className="w-full bg-[#0E0E0D] text-white text-sm font-medium py-4 rounded-xl hover:opacity-80 transition-opacity mt-2"
+              className="w-full bg-[#14141A] text-white text-sm font-medium py-4 rounded-xl hover:opacity-80 transition-opacity mt-2"
             >
               Envoyer le message
             </button>

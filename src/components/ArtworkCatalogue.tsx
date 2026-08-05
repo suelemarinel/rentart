@@ -162,7 +162,7 @@ export default function ArtworkCatalogue({ artworks }: Props) {
           gap: 8px;
           padding: 13px 26px;
           border-radius: 999px;
-          background: #111827;
+          background: #14141A;
           color: white;
           font-size: 12px;
           font-weight: 500;

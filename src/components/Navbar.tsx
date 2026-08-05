@@ -21,15 +21,15 @@ export default function Navbar() {
   if (scrolled === null) return null
 
   const transparent = isHeroPage && !scrolled
-  const whiteText = pathname === '/' && !scrolled
+  const whiteText = isHeroPage && !scrolled
 
   const navBg = transparent
-  ? 'bg-gradient-to-b from-black/35 to-transparent border-transparent'
-  : 'bg-white border-b border-gray-200'
+    ? 'bg-transparent border-transparent'
+    : 'bg-white border-b border-gray-200'
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 h-15 flex items-center justify-between px-8 transition-all duration-300 ${navBg}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center justify-between px-8 transition-all duration-300 ${navBg}`}>
         <Link
           href="/"
           className={`font-serif text-xl tracking-tight transition-colors duration-300 ${whiteText ? 'text-white' : 'text-gray-900'}`}
@@ -37,7 +37,6 @@ export default function Navbar() {
           rent<span className={`italic ${whiteText ? 'text-white/55' : 'text-gray-400'}`}>art</span>
         </Link>
 
-        {/* Desktop — caché sous 768px */}
         <ul style={{ display: 'var(--nav-desktop-display, flex)' }} className="gap-8 list-none">
           {[
             { href: '/', label: 'Catalogue' },
@@ -65,12 +64,11 @@ export default function Navbar() {
         <Link href="/contact" className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 hidden-mobile ${
   whiteText
     ? 'bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-sm'
-    : 'bg-gray-900 text-white hover:opacity-80'
+    : 'bg-[#14141A] text-white hover:opacity-80'
 }`}>
-  Prendre rendez-vous
-</Link>
+          Prendre rendez-vous
+        </Link>
 
-        {/* Burger — visible seulement sur mobile */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
@@ -83,7 +81,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Menu overlay mobile */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 40,
         backgroundColor: 'white',
@@ -94,17 +91,17 @@ export default function Navbar() {
         display: 'none',
       }} className="mobile-menu">
         {[
-  { href: '/', label: 'Catalogue' },
-  { href: '/a-propos', label: 'À propos' },
-  { href: '/contact', label: 'Contact' },
-].map(({ href, label }) => (
-  <Link key={href} href={href} onClick={() => setMenuOpen(false)} className="font-serif" style={{
-    fontSize: '2.5rem',
-    textDecoration: 'none', color: pathname === href ? '#d1d5db' : '#111827',
-  }}>
-    {label}
-  </Link>
-))}
+          { href: '/', label: 'Catalogue' },
+          { href: '/a-propos', label: 'À propos' },
+          { href: '/contact', label: 'Contact' },
+        ].map(({ href, label }) => (
+          <Link key={href} href={href} onClick={() => setMenuOpen(false)} className="font-serif" style={{
+            fontSize: '2.5rem',
+            textDecoration: 'none', color: pathname === href ? '#d1d5db' : '#111827',
+          }}>
+            {label}
+          </Link>
+        ))}
       </div>
 
       <style>{`

@@ -145,7 +145,7 @@ export default function AProposPage() {
         .step-grid { display: grid; grid-template-columns: 80px 1fr; gap: 0 3rem; }
 
         @media (max-width: 767px) {
-          .hero-frame { padding: 0.5rem; height: 92vh; }
+          .hero-frame { padding: 0.25rem; height: 92vh; }
           .steps-section { padding: 3rem 1.5rem; }
           .faq-section { padding: 3rem 1.5rem; }
           .cta-section { padding: 3rem 1.5rem; }

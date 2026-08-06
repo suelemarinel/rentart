@@ -35,14 +35,6 @@ export default function HeroCatalogue() {
           et avantages fiscaux.
         </p>
       </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-        <span className="text-[9px] tracking-[0.2em] uppercase text-white/40">Scroll</span>
-        <div className="w-6 h-10 border border-white/25 rounded-full flex items-start justify-center pt-2">
-          <div className="w-1 h-2 bg-white/55 rounded-full animate-bounce" />
-        </div>
-      </div>
     </section>
   )
 }

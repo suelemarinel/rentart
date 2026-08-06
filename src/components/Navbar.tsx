@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useFavorites } from '@/context/FavoritesContext'
-import { Heart } from 'lucide-react'
+import { Heart, Menu, X } from 'lucide-react'
 
 function FavoritesIcon() {
   const { count } = useFavorites()
@@ -34,10 +34,17 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', check)
   }, [pathname])
 
+  // Fermer le menu au changement de page
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
+
   if (scrolled === null) return null
 
-  const transparent = isHeroPage && !scrolled
-  const whiteText = isHeroPage && !scrolled
+  // Quand le menu est ouvert, on force l'état "solide" (fond blanc, texte sombre)
+  // pour que la croix reste toujours visible, peu importe le scroll.
+  const transparent = isHeroPage && !scrolled && !menuOpen
+  const whiteText = transparent
 
   const navBg = transparent
     ? 'bg-transparent border-transparent'
@@ -46,19 +53,28 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 h-[60px] items-center px-8 transition-all duration-300 ${navBg}`}
-        style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr' }}
+        className={`fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center justify-between px-6 md:px-8 transition-all duration-300 ${navBg}`}
       >
-        {/* Colonne gauche — logo */}
+        {/* Logo */}
         <Link
           href="/"
-          className={`font-serif text-xl tracking-tight transition-colors duration-300 justify-self-start ${whiteText ? 'text-white' : 'text-gray-900'}`}
+          className={`font-serif text-xl tracking-tight transition-colors duration-300 ${whiteText ? 'text-white' : 'text-gray-900'}`}
         >
           rent<span className={`italic ${whiteText ? 'text-white/55' : 'text-gray-400'}`}>art</span>
         </Link>
 
-        {/* Colonne centrale — liens, vraiment centrés */}
-        <ul style={{ display: 'var(--nav-desktop-display, flex)' }} className="gap-8 list-none justify-self-center">
+        {/* Liens centraux — desktop uniquement, position absolue pour ne pas impacter le flex */}
+        <ul
+          className="nav-links-desktop"
+          style={{
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            gap: '2rem',
+            listStyle: 'none',
+          }}
+        >
           {[
             { href: '/', label: 'Catalogue' },
             { href: '/a-propos', label: 'À propos' },
@@ -82,8 +98,8 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Colonne droite — cœur + bouton regroupés */}
-        <div className="flex items-center gap-5 justify-self-end">
+        {/* Droite — cœur + bouton + burger */}
+        <div className="flex items-center gap-5">
           <Link
             href="/favoris"
             aria-label="Mes favoris"
@@ -104,11 +120,17 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
             className="burger-btn"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'none' }}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '6px',
+              display: 'none',
+              color: whiteText ? 'white' : '#111827',
+              transition: 'color 0.3s',
+            }}
           >
-            <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', marginBottom: '5px', transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none' }} />
-            <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', marginBottom: '5px', transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: '22px', height: '2px', backgroundColor: whiteText ? 'white' : '#111827', transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
+            {menuOpen ? <X size={22} strokeWidth={1.6} /> : <Menu size={22} strokeWidth={1.6} />}
           </button>
         </div>
       </nav>
@@ -140,7 +162,7 @@ export default function Navbar() {
         @media (max-width: 767px) {
           .burger-btn { display: block !important; }
           .hidden-mobile { display: none !important; }
-          nav ul { display: none !important; }
+          .nav-links-desktop { display: none !important; }
           .mobile-menu { display: flex !important; }
         }
       `}</style>

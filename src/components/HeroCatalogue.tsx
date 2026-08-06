@@ -5,13 +5,16 @@ export default function HeroCatalogue() {
     <section className="relative h-screen flex flex-col justify-end overflow-hidden"
       style={{ paddingLeft: 'clamp(1.5rem, 8vw, 5rem)', paddingRight: 'clamp(1.5rem, 8vw, 5rem)', paddingBottom: 'clamp(5rem, 10vw, 5rem)' }}
     >
-      {/* Image */}
-      <div
-        className="absolute inset-0 bg-cover animate-hero-reveal hero-bg"
-        style={{
-          backgroundImage: "url('/hero-principal2.jpg')",
-        }}
-      />
+      {/* Wrapper — porte le zoom mobile, jamais touché par l'animation */}
+      <div className="absolute inset-0 overflow-hidden hero-bg-wrapper">
+        {/* Image — garde son animation d'entrée intacte */}
+        <div
+          className="absolute inset-0 bg-cover animate-hero-reveal hero-bg"
+          style={{
+            backgroundImage: "url('/hero-principal2.jpg')",
+          }}
+        />
+      </div>
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/15 to-black/80" />
 
@@ -40,12 +43,14 @@ export default function HeroCatalogue() {
           background-position: 50% 75%;
         }
         @media (max-width: 767px) {
-  .hero-bg {
-    background-position: 75% 100%;
-    transform: scale(1.35);
-    transform-origin: 50% 100%;
-  }
-}
+          .hero-bg {
+            background-position: 72% 100%;
+          }
+          .hero-bg-wrapper {
+            transform: scale(1.1);
+            transform-origin: 50% 100%;
+          }
+        }
       `}</style>
     </section>
   )

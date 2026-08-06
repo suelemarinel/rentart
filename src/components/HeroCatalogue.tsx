@@ -7,10 +7,9 @@ export default function HeroCatalogue() {
     >
       {/* Image */}
       <div
-        className="absolute inset-0 bg-cover animate-hero-reveal"
+        className="absolute inset-0 bg-cover animate-hero-reveal hero-bg"
         style={{
           backgroundImage: "url('/hero-principal2.jpg')",
-          backgroundPosition: '50% 75%'
         }}
       />
       {/* Overlay */}
@@ -35,6 +34,19 @@ export default function HeroCatalogue() {
           et avantages fiscaux.
         </p>
       </div>
+
+      <style>{`
+        .hero-bg {
+          background-position: 50% 75%;
+        }
+        @media (max-width: 767px) {
+  .hero-bg {
+    background-position: 75% 100%;
+    transform: scale(1.35);
+    transform-origin: 50% 100%;
+  }
+}
+      `}</style>
     </section>
   )
 }

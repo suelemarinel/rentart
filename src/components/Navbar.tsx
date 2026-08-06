@@ -34,15 +34,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', check)
   }, [pathname])
 
-  // Fermer le menu au changement de page
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
 
   if (scrolled === null) return null
 
-  // Quand le menu est ouvert, on force l'état "solide" (fond blanc, texte sombre)
-  // pour que la croix reste toujours visible, peu importe le scroll.
   const transparent = isHeroPage && !scrolled && !menuOpen
   const whiteText = transparent
 
@@ -63,7 +60,7 @@ export default function Navbar() {
           rent<span className={`italic ${whiteText ? 'text-white/55' : 'text-gray-400'}`}>art</span>
         </Link>
 
-        {/* Liens centraux — desktop uniquement, position absolue pour ne pas impacter le flex */}
+        {/* Liens centraux — desktop uniquement */}
         <ul
           className="nav-links-desktop"
           style={{
@@ -103,7 +100,7 @@ export default function Navbar() {
           <Link
             href="/favoris"
             aria-label="Mes favoris"
-            className={`hidden-mobile inline-flex items-center transition-colors duration-300 ${whiteText ? 'text-white/70 hover:text-white' : 'text-gray-400 hover:text-gray-900'}`}
+            className={`inline-flex items-center transition-colors duration-300 ${whiteText ? 'text-white/70 hover:text-white' : 'text-gray-400 hover:text-gray-900'}`}
           >
             <FavoritesIcon />
           </Link>

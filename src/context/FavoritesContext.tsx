@@ -3,15 +3,16 @@
 import { createContext, useContext, useEffect, useState, useRef, ReactNode } from 'react'
 import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
+import { FAVORITES_STORAGE_KEY as STORAGE_KEY } from '@/lib/storageKeys'
 import { useAuth } from './AuthContext'
-
-const STORAGE_KEY = 'rentart-favorites'
 
 type FavoritesContextType = {
   favorites: string[]
   isFavorited: (id: string) => boolean
   toggleFavorite: (id: string) => void
   count: number
+  showLoginPrompt: boolean
+  dismissLoginPrompt: () => void
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
@@ -37,6 +38,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useAuth()
   const [favorites, setFavorites] = useState<string[]>([])
   const [hydrated, setHydrated] = useState(false)
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
   const mergedRef = useRef(false)
 
   // Hydratation initiale — visiteur anonyme
@@ -85,20 +87,26 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   const isFavorited = (id: string) => favorites.includes(id)
 
   const toggleFavorite = async (id: string) => {
-    const next = favorites.includes(id)
-      ? favorites.filter(f => f !== id)
-      : [...favorites, id]
+    const isAdding = !favorites.includes(id)
+    const next = isAdding
+      ? [...favorites, id]
+      : favorites.filter(f => f !== id)
 
     setFavorites(next)
 
     if (user) {
       const ref = doc(db, 'favorites', user.uid)
       await setDoc(ref, { artworkIds: next }, { merge: true })
+    } else if (isAdding) {
+      // Visiteur anonyme : invite à se connecter à chaque like, tant qu'il n'a pas de compte
+      setShowLoginPrompt(true)
     }
   }
 
+  const dismissLoginPrompt = () => setShowLoginPrompt(false)
+
   return (
-    <FavoritesContext.Provider value={{ favorites, isFavorited, toggleFavorite, count: favorites.length }}>
+    <FavoritesContext.Provider value={{ favorites, isFavorited, toggleFavorite, count: favorites.length, showLoginPrompt, dismissLoginPrompt }}>
       {children}
     </FavoritesContext.Provider>
   )
@@ -108,4 +116,4 @@ export function useFavorites() {
   const ctx = useContext(FavoritesContext)
   if (!ctx) throw new Error('useFavorites doit être utilisé à l\'intérieur de FavoritesProvider')
   return ctx
-}
+}               

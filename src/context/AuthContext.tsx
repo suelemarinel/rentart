@@ -94,7 +94,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { isNewUser }
   }
 
-  const logout = async () => {
+    const logout = async () => {
     await signOut(auth)
     track('logout')
   }

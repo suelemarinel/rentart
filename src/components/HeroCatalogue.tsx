@@ -31,7 +31,7 @@ export default function HeroCatalogue() {
           style={{ fontSize: 'clamp(2.5rem, 8vw, 3.75rem)' }}
         >
           L&apos;art transforme un espace.<br />
-          <em className="italic text-white/55">RentArt le rend accessible.</em>
+          <em className="italic text-white/70">RentArt le rend accessible.</em>
         </h1>
         <p className="text-sm font-light text-white/65 leading-relaxed max-w-md mb-9">
           Louez des œuvres d&apos;art originales pour vos hôtels, restaurants

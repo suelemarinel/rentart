@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import LoginPromptModal from "@/components/LoginPromptModal"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Cormorant_Garamond } from "next/font/google"
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     default: "Rentart — Location d'œuvres d'art",
     template: '%s — Rentart',
   },
-    description: "Louez des œuvres d'art originales pour votre restaurant, hôtel ou espace professionnel. Sélection, livraison et installation, service tout compris.",
+  description: "Louez des œuvres d'art originales pour votre restaurant, hôtel ou espace professionnel. Sélection, livraison et installation, service tout compris.",
   openGraph: {
     siteName: 'Rentart',
     locale: 'fr_BE',
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Navbar />
             <ProfileGuard>{children}</ProfileGuard>
             <Footer />
+            <LoginPromptModal />
           </FavoritesProvider>
         </AuthProvider>
       </body>

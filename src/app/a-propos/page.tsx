@@ -10,7 +10,7 @@ const FAQ = [
   },
   {
     q: "Qui est responsable en cas de dommage ?",
-    a: "Les œuvres sont assurées par Galerie Sept pendant toute la durée de la location. En cas de sinistre, notre équipe gère directement la procédure — vous n'avez aucune démarche à effectuer."
+    a: "Les œuvres sont assurées par RentArt pendant toute la durée de la location. En cas de sinistre, notre équipe gère directement la procédure — vous n'avez aucune démarche à effectuer."
   },
   {
     q: "Peut-on changer d'œuvre en cours de contrat ?",
@@ -34,7 +34,7 @@ const STEPS = [
   {
     num: "01",
     title: "Installation",
-    text: "Galerie Sept prend en charge l'intégralité du processus. Nos équipes évaluent vos espaces, sélectionnent les œuvres adaptées à votre identité visuelle, assurent la livraison et procèdent à l'accrochage professionnel — sans perturber votre activité."
+    text: "RentArt prend en charge l'intégralité du processus. Nos équipes évaluent vos espaces, sélectionnent les œuvres adaptées à votre identité visuelle, assurent la livraison et procèdent à l'accrochage professionnel — sans perturber votre activité."
   },
   {
     num: "02",
@@ -198,7 +198,7 @@ export default function AProposPage() {
             style={{ top: 'clamp(4.5rem, 8vw, 6rem)', left: 'clamp(1.5rem, 5vw, 4rem)' }}
           >
             <span className="block w-7 h-px bg-white/50" />
-            Galerie Sept · Bruxelles & Knokke
+            RentArt
           </p>
 
           {/* Texte principal — flotte directement sur l'image */}

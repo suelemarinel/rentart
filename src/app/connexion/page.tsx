@@ -64,7 +64,7 @@ export default function ConnexionPage() {
         <div className="mb-10 text-center">
           <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-[#8A8880] mb-4 flex items-center justify-center gap-3">
             <span className="block w-7 h-px bg-[#C8C7C4]" />
-            Galerie Sept
+            RentArt
             <span className="block w-7 h-px bg-[#C8C7C4]" />
           </p>
           <h1 className="font-serif text-[#14141A]" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)' }}>

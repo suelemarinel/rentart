@@ -19,7 +19,7 @@ export default function ContactPage() {
         <div className="mb-16">
           <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-[#8A8880] mb-4 flex items-center gap-3">
             <span className="block w-7 h-px bg-[#C8C7C4]" />
-            Galerie Sept
+            RentArt
           </p>
           <h1 className="font-serif text-4xl text-[#14141A] leading-tight mb-4" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.25rem)' }}>
             Parlons de votre<br />

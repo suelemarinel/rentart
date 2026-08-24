@@ -31,7 +31,7 @@ export default function CompleterProfilPage() {
 
         <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-[#8A8880] mb-4 flex items-center justify-center gap-3">
           <span className="block w-7 h-px bg-[#C8C7C4]" />
-          Galerie Sept
+          RentArt
           <span className="block w-7 h-px bg-[#C8C7C4]" />
         </p>
 

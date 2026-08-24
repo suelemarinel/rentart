@@ -6,7 +6,7 @@ export default function Footer() {
       <style>{`
         .footer-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 3rem;
           padding-bottom: 4rem;
           border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -35,11 +35,11 @@ export default function Footer() {
           <div>
             <p className="font-serif text-2xl mb-3">rent<em className="italic text-white/50">art</em></p>
             <p className="text-sm font-light text-white/50 leading-relaxed">
-              Des œuvres originales dans vos espaces professionnels.
+              Art original for exceptional spaces.
             </p>
-            <a href="https://instagram.com/galeriesept" target="_blank" rel="noopener noreferrer"
+            <a href="https://instagram.com/rentart" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-6 text-xs text-white/50 hover:text-white transition-colors">
-              Instagram · @galeriesept
+              Instagram · @rentart
             </a>
           </div>
 
@@ -52,20 +52,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
-            <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-white/40 mb-5">Nos galeries</p>
-            <div className="space-y-5">
-              <div>
-                <p className="text-sm text-white/80 font-medium mb-1">Bruxelles</p>
-                <p className="text-xs text-white/45 leading-relaxed font-light">Rue de la Régence 7<br />1000 Bruxelles</p>
-              </div>
-              <div>
-                <p className="text-sm text-white/80 font-medium mb-1">Knokke</p>
-                <p className="text-xs text-white/45 leading-relaxed font-light">Zeedijk 123<br />8300 Knokke-Heist</p>
-              </div>
-            </div>
-          </div>
-
           <div className="flex flex-col justify-between" style={{ gap: '1.5rem' }}>
             <div>
               <p className="text-[11px] font-medium tracking-[0.1em] uppercase text-white/40 mb-5">Consultation</p>
@@ -73,7 +59,7 @@ export default function Footer() {
                 Rencontrons-nous pour sélectionner les œuvres adaptées à votre espace.
               </p>
             </div>
-            <a href="https://calendly.com/galeriesept" target="_blank" rel="noopener noreferrer"
+            <a href="https://calendly.com/PLACEHOLDER" target="_blank" rel="noopener noreferrer"
   className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 text-xs font-medium tracking-wide px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
   style={{ alignSelf: 'flex-start' }}>
   Prendre rendez-vous
@@ -83,8 +69,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom" style={{ paddingTop: '2rem' }}>
-          <p className="text-xs text-white/35">© 2025 Rentart · Galerie Sept. Tous droits réservés.</p>
-          <p className="text-xs text-white/35">Bruxelles &amp; Knokke</p>
+          <p className="text-xs text-white/35">© 2026 RentArt. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

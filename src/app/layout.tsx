@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: "Rentart — Location d'œuvres d'art",
     template: '%s — Rentart',
   },
-  description: "Louez des œuvres d'art originales pour votre restaurant, hôtel ou espace professionnel. Service tout compris par Galerie Sept, Bruxelles & Knokke.",
+    description: "Louez des œuvres d'art originales pour votre restaurant, hôtel ou espace professionnel. Sélection, livraison et installation, service tout compris.",
   openGraph: {
     siteName: 'Rentart',
     locale: 'fr_BE',

@@ -22,7 +22,7 @@ export default function HeroCatalogue() {
       <div className="relative z-10 animate-content-reveal">
         <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-white/55 mb-6 flex items-center gap-3">
           <span className="block w-7 h-px bg-white/40" />
-          Galerie Sept · Bruxelles & Knokke
+            RentArt
         </p>
         <h1
           className="font-serif leading-[1.06] text-white max-w-3xl mb-9"
@@ -32,7 +32,7 @@ export default function HeroCatalogue() {
           <em className="italic text-white/55">Transformez vos espaces.</em>
         </h1>
         <p className="text-sm font-light text-white/65 leading-relaxed max-w-md">
-          Des œuvres originales sélectionnées par la Galerie Sept, livrées et installées
+          Des œuvres originales sélectionnées avec soin, livrées et installées
           dans votre restaurant, hôtel ou espace professionnel — avec option de rachat
           et avantages fiscaux.
         </p>

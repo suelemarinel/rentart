@@ -171,7 +171,7 @@ export default function ArtworkDetail({ artwork }: Props) {
 
           {/* CTA */}
           <a
-            href={`mailto:contact@galeriesept.com?subject=Demande de location — ${artwork.title}`}
+            href={`mailto:contact@rentart.be?subject=Demande de location — ${artwork.title}`}
             className="w-full border border-[#111110] text-[#111110] text-xs font-medium uppercase tracking-[0.15em] py-4 rounded-sm text-center hover:bg-[#111110] hover:text-white transition-colors duration-300"
           >
             Demander une location

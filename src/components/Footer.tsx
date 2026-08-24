@@ -59,7 +59,7 @@ export default function Footer() {
                 Rencontrons-nous pour sélectionner les œuvres adaptées à votre espace.
               </p>
             </div>
-            <a href="https://calendly.com/PLACEHOLDER" target="_blank" rel="noopener noreferrer"
+            <a href="/contact" target="_blank" rel="noopener noreferrer"
   className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 text-xs font-medium tracking-wide px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
   style={{ alignSelf: 'flex-start' }}>
   Prendre rendez-vous

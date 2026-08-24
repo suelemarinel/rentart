@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import CalendlyWidget from '@/components/CalendlyWidget'
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
@@ -30,21 +31,15 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Calendly */}
-        <div className="bg-white border border-[#E8E7E4] rounded-2xl p-8 text-center mb-2">
-          <p className="text-[11px] font-medium tracking-widest uppercase text-[#8A8880] mb-3">Consultation</p>
-          <h2 className="font-serif text-2xl text-[#14141A] mb-3">Prendre rendez-vous</h2>
-          <p className="text-sm font-light text-[#8A8880] leading-[1.8] mb-8">
+        {/* Calendly — widget intégré directement dans la page */}
+        <div className="bg-white border border-[#E8E7E4] rounded-2xl p-6 md:p-8 mb-2">
+          <p className="text-[11px] font-medium tracking-widest uppercase text-[#8A8880] mb-3 text-center">Consultation</p>
+          <h2 className="font-serif text-2xl text-[#14141A] mb-3 text-center">Prendre rendez-vous</h2>
+          <p className="text-sm font-light text-[#8A8880] leading-[1.8] mb-6 text-center">
             Rencontrons-nous pour sélectionner ensemble les œuvres adaptées à votre espace.
           </p>
-          <a
-            href="https://calendly.com/PLACEHOLDER"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-[#14141A] text-white text-sm font-medium px-10 py-4 rounded-full hover:opacity-80 transition-opacity"
-          >
-            Choisir un créneau
-          </a>
+
+           <CalendlyWidget /> 
         </div>
 
         {/* Séparateur */}

@@ -131,7 +131,7 @@ export default function AProposPage() {
           right: clamp(1.5rem, 5vw, 4rem);
           z-index: 10;
         }
-        .steps-section { padding: 7rem 5rem; }
+        .steps-section { padding: 4rem 5rem 7rem; }
         .faq-section { padding: 7rem 5rem; }
         .step-item { text-align: center; }
         .step-num { color: #C8C7C4; }
@@ -194,7 +194,7 @@ export default function AProposPage() {
 
       {/* STEPS */}
       <section className="steps-section" style={{ background: '#FAFAF8' }}>
-        <div className="text-center border-b border-gray-100 pb-10" style={{ marginBottom: 'clamp(2rem, 6vw, 5rem)' }}>
+        <div className="text-center border-b border-gray-100 pb-6" style={{ marginBottom: 'clamp(1rem, 3vw, 2rem)' }}>
           <p className="text-[11px] font-medium tracking-[0.14em] uppercase text-[#8A8880] mb-4 flex items-center justify-center gap-3">
             <span className="block w-7 h-px bg-[#C8C7C4]" />
             4 étapes
@@ -207,8 +207,8 @@ export default function AProposPage() {
             key={step.num}
             ref={el => { if (el) stepsRef.current[i] = el }}
             data-delay={i * 100}
-            className="step-item opacity-0 translate-y-5 transition-all duration-700"
-            style={{ padding: 'clamp(1.5rem, 4vw, 3.5rem) 0', borderBottom: '1px solid #f3f4f6' }}
+            className="step-item opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+            style={{ padding: 'clamp(1rem, 2.5vw, 2rem) 0', borderBottom: '1px solid #f3f4f6' }}
           >
             <span className="step-num font-serif leading-none block mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>{step.num}</span>
             <h3 className="font-serif text-2xl text-gray-900 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.5rem)' }}>{step.title}</h3>
@@ -218,7 +218,7 @@ export default function AProposPage() {
       </section>
 
       {/* CTA — rectangle arrondi, avant la FAQ */}
-      <section className="bg-white" style={{ padding: 'clamp(2rem, 6vw, 4rem) clamp(1.5rem, 6vw, 5rem)' }}>
+      <section style={{ background: '#FAFAF8', padding: 'clamp(2rem, 6vw, 4rem) clamp(1.5rem, 6vw, 5rem)' }}>
         <div
           className="text-center"
           style={{
@@ -244,7 +244,7 @@ export default function AProposPage() {
       </section>
 
       {/* FAQ — tout en bas */}
-      <section className="faq-section" style={{ background: '#F2F1EF' }}>
+      <section className="faq-section" style={{ background: '#FAFAF8' }}>
         <div className="flex items-baseline justify-between mb-16" style={{ marginBottom: 'clamp(2rem, 5vw, 4rem)' }}>
           <h2 className="font-serif text-3xl text-gray-900" style={{ fontSize: 'clamp(1.5rem, 3vw, 1.875rem)' }}>Questions fréquentes</h2>
           <span className="text-[11px] tracking-[0.1em] uppercase text-gray-400">FAQ</span>
